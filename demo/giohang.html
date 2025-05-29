@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="style/style2.css" />
+  </head>
+
+  <body>
+    <div class="contain">
+      <h2>🛒 Giỏ Hàng Của Bạn</h2>
+      <div class="gird3_2">
+        <div>
+          <div class="center">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th>Hình ảnh</th>
+                  <th>Số lượng</th>
+
+                  <th>Giá</th>
+
+                  <th>Tổng</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <div class=""></div>
+                <tr>
+                  <td>@item.TenSanPham</td>
+                  <td><img src="@item.HinhAnh" width="50" height="50" /></td>
+                  <td>
+                    <div class="Flex-center">
+                      <div id="Giam">-</div>
+                      <h3 id="soLuong">1</h3>
+                      <div id="Tang">+</div>
+                    </div>
+                  </td>
+
+                  <td id="GiaSP">100000đ</td>
+                  <td id="tong"></td>
+                  <td>
+                    <a
+                      asp-action="XoaSanPhamKhoiGio"
+                      asp-route-id="@item.SanPhamId"
+                      class="btn-danger"
+                      >Xóa
+                    </a>
+                    <a
+                      asp-action="ThanhToan"
+                      asp-route-spId="@item.SanPhamId"
+                      class="btn-danger"
+                      >Thanh toán
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="BuyAll">
+          <h1>📄 Đơn hàng</h1>
+          <div class="text-align">
+            <p>Tổng tiền</p>
+            <p id="TongTienien">150000đđ</p>
+          </div>
+          <div class="text-align">
+            <p>Giảm Giá</p>
+            <p id="GiamGiaGiamGia">0đ</p>
+          </div>
+          <div class="text-align">
+            <h2>Tạm Tính</h2>
+            <h2 id="TamTinhinh">1500đ</h2>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1>Sản phẩm khác</h1>
+        <div class="grid1-4-5">
+          <div class="product-item">
+            <img src="img/Thuoc2.png" alt="" />
+            <p>Nat C 1000 hỗ trợ tăng đề kháng lọ 60 viên</p>
+            <p style="width: 100%; font-weight: bold">150.000đ</p>
+            <button class="themgiohang">Thêm vào giỏ hàng</button>
+          </div>
+          <div class="product-item">
+            <img src="img/Thuoc2.png" alt="" />
+            <p>Nat C 1000 hỗ trợ tăng đề kháng lọ 60 viên</p>
+            <p style="width: 100%; font-weight: bold">150.000đ</p>
+            <button class="themgiohang">Thêm vào giỏ hàng</button>
+          </div>
+          <div class="product-item">
+            <img src="img/Thuoc2.png" alt="" />
+            <p>Nat C 1000 hỗ trợ tăng đề kháng lọ 60 viên</p>
+            <p style="width: 100%; font-weight: bold">150.000đ</p>
+            <button class="themgiohang">Thêm vào giỏ hàng</button>
+          </div>
+          <div class="product-item">
+            <img src="img/Thuoc2.png" alt="" />
+            <p>Nat C 1000 hỗ trợ tăng đề kháng lọ 60 viên</p>
+            <p style="width: 100%; font-weight: bold">150.000đ</p>
+            <button class="themgiohang">Thêm vào giỏ hàng</button>
+          </div>
+          <div class="product-item">
+            <img src="img/Thuoc2.png" alt="" />
+            <p>Nat C 1000 hỗ trợ tăng đề kháng lọ 60 viên</p>
+            <p style="width: 100%; font-weight: bold">150.000đ</p>
+            <button class="themgiohang">Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnGiam = document.getElementById("Giam");
+      const btnTang = document.getElementById("Tang");
+      const soLuongEl = document.getElementById("soLuong");
+      const tongEl = document.getElementById("tong"); // Tổng giá sản phẩm
+      const tongTienEl = document.getElementById("TongTienien"); // Tổng tiền toàn bộ giỏ hàng
+      const giamGiaEl = document.getElementById("GiamGiaGiamGia"); // Giảm giá
+      const tamTinhEl = document.getElementById("TamTinhinh"); // Tạm tính
+      const GiaSp = document.getElementById("GiaSP"); // Giá sản phẩm
+
+      // Lấy giá sản phẩm và chuyển thành số
+      let giaSanPham = parseInt(GiaSp.textContent.replace("đ", "").trim());
+
+      function updateTotal() {
+        let soLuong = parseInt(soLuongEl.textContent);
+        let tongGia = soLuong * giaSanPham;
+
+        // Cập nhật tổng giá của sản phẩm trong hàng
+        tongEl.textContent = tongGia.toLocaleString() + " đ";
+
+        // Cập nhật tổng tiền của giỏ hàng
+        let tongTien = tongGia;
+        let giamGia = 0; // Giả sử không có giảm giá
+        let tamTinh = tongTien - giamGia;
+
+        tongTienEl.textContent = tongTien.toLocaleString() + " đ";
+        giamGiaEl.textContent = giamGia.toLocaleString() + " đ";
+        tamTinhEl.textContent = tamTinh.toLocaleString() + " đ";
+      }
+
+      btnGiam.addEventListener("click", function () {
+        let soLuong = parseInt(soLuongEl.textContent);
+        if (soLuong > 1) {
+          soLuongEl.textContent = soLuong - 1;
+          updateTotal();
+        }
+      });
+
+      btnTang.addEventListener("click", function () {
+        let soLuong = parseInt(soLuongEl.textContent);
+        soLuongEl.textContent = soLuong + 1;
+        updateTotal();
+      });
+
+      // Gọi hàm cập nhật tổng tiền ngay từ đầu
+      updateTotal();
+    });
+  </script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quên mật khẩu</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div class="flex-center gap40px center backgroudwihte">
+      <div class="">
+        <img src="img/Pharmacy.png" alt="" />
+      </div>
+      <div id="containerLogin">
+        <h1 style="color: rgba(45, 152, 42, 1)">Quên mật khẩu</h1>
+        <form action="#" class="gap40px">
+          <label for="phoneNumber"
+            >Số điện thoại:
+            <input id="phoneNumber" type="text" value="" />
+            <p style="color: red">*</p>
+          </label>
+          <div id="btnSendCode" class="button">Gửi mã</div>
+          <label for="Password"
+            >Nhập mã xác nhận:
+            <input id="Password" type="text" value="" />
+            <p style="color: red">*</p>
+          </label>
+          <p style="margin-left: 36%">
+            Chưa nhận được mã?<a href="#" style="color: rgba(45, 152, 42, 1)"
+              >Gửi lại mã (60s)</a
+            >
+          </p>
+
+          <button type="submit">HOÀN TẤT</button>
+        </form>
+        <a class="btnBack" href="login.html"> &lt;&lt; Trở về </a>
+      </div>
+    </div>
+  </body>
+</html>
