@@ -38,6 +38,15 @@ class Product {
             default: return 0.0;
         }
     }
+     private double getTaxRatett(char firstChar) {
+        switch (firstChar) {
+            case 'T': return 0.29;
+            case 'C': return 0.10;
+            case 'D': return 0.08;
+            case 'M': return 0.02;
+            default: return 0.0;
+        }
+    }
 
     private double getShippingFeeRate(char firstChar) {
         switch (firstChar) {
